@@ -1,0 +1,49 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'maven-publish'
+}
+
+group = 'com.halowing.spring'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+//        	groupId = 'com.halowing.spring'
+            artifactId = 'web-lib'
+            from components.java
+            versionMapping {
+            	usage('java-api') {
+            		froomResolutionOf('runtimeClasspath')
+            	}
+            	usage('java-runtime') {
+            		fromResolutionResult()
+            	}
+            }
+        }
+    }
+    
+//    repositories {
+//   	maven {
+//    		def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+//    		def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+//    		url = version.endWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl 
+//    	}
+//    }
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
