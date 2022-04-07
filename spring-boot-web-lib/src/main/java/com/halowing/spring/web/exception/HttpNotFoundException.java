@@ -1,15 +1,17 @@
 package com.halowing.spring.web.exception;
 
+import org.springframework.http.HttpStatus;
+
 public class HttpNotFoundException extends DefaultApplicationException  {
 
 	private static final long serialVersionUID = -1702667171228990922L;
 	
 	public HttpNotFoundException() {
-		super(404);
+		super(HttpStatus.NOT_FOUND);
 	}
 	
 	public HttpNotFoundException(String message) {
-		super(404,message);
+		super(HttpStatus.NOT_FOUND,message);
 	}
 
 }

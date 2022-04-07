@@ -2,6 +2,8 @@ package com.halowing.spring.web.dto.response;
 
 import java.io.Serializable;
 
+import org.springframework.http.HttpStatus;
+
 public class DefaultResponse implements Serializable {
 
 	private static final long serialVersionUID = -1234462789808842557L;
@@ -10,14 +12,14 @@ public class DefaultResponse implements Serializable {
 	
 	protected final String message;
 
-	public DefaultResponse(Integer status, String message) {
-		super();
-		this.status = status;
+	public DefaultResponse(HttpStatus httpStatus, String message) {
+		this.status = httpStatus.value();
 		this.message = message;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	
+	public DefaultResponse(HttpStatus httpStatus) {
+		this.status = httpStatus.value();
+		this.message = null;
 	}
 
 	public Integer getStatus() {

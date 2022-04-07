@@ -1,5 +1,7 @@
 package com.halowing.spring.web.exception;
 
+import org.springframework.http.HttpStatus;
+
 public class DefaultApplicationException extends RuntimeException {
 
 	private static final long serialVersionUID = -8732186396685769772L;
@@ -12,20 +14,21 @@ public class DefaultApplicationException extends RuntimeException {
 
 
 	public DefaultApplicationException() {
-		this(DEFAULT_ERROR_STATUS,null);
+		this.status = DEFAULT_ERROR_STATUS;
 	}
 	
-	public DefaultApplicationException(Integer status) {
-		this(DEFAULT_ERROR_STATUS,null);
-	}
-
 	public DefaultApplicationException(String message) {
-		this(DEFAULT_ERROR_STATUS,message);
+		this.status = DEFAULT_ERROR_STATUS;
+		this.message = message;
+	}
+	
+	public DefaultApplicationException(HttpStatus status) {
+		this(status,null);
 	}
 
-	public DefaultApplicationException(Integer status, String message) {
+	public DefaultApplicationException(HttpStatus status, String message) {
 		super(message);
-		this.status = status;
+		this.status = status.value();
 		this.message = message;
 	}	
 
