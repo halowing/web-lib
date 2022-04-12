@@ -10,8 +10,8 @@ public class HttpNotFoundException extends DefaultApplicationException  {
 		super(HttpStatus.NOT_FOUND);
 	}
 	
-	public HttpNotFoundException(String message) {
-		super(HttpStatus.NOT_FOUND,message);
+	public HttpNotFoundException(String id) {
+		super(HttpStatus.NOT_FOUND,"ID is "+id+". and It is not found.");
 	}
 
 }

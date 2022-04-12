@@ -6,9 +6,9 @@ public class DefaultApplicationException extends RuntimeException {
 
 	private static final long serialVersionUID = -8732186396685769772L;
 	
-	private static final Integer DEFAULT_ERROR_STATUS = 500;
+	private static final HttpStatus DEFAULT_ERROR_STATUS = HttpStatus.INTERNAL_SERVER_ERROR;
 	
-	private Integer status;
+	private HttpStatus status;
 	private String message;
 	
 
@@ -28,13 +28,17 @@ public class DefaultApplicationException extends RuntimeException {
 
 	public DefaultApplicationException(HttpStatus status, String message) {
 		super(message);
-		this.status = status.value();
+		this.status = status;
 		this.message = message;
 	}	
 
 	public DefaultApplicationException(Throwable cause) {
 		super(cause);
 		this.status = DEFAULT_ERROR_STATUS;
+	}
+	
+	public HttpStatus getStatus() {
+		return this.status;
 	}
 
 	@Override
