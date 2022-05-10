@@ -10,7 +10,7 @@ import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
 
-@MappedTypes(StringToNumericHandler.class)
+@MappedTypes(String.class)
 @MappedJdbcTypes(value = JdbcType.NUMERIC)
 public class StringToNumericHandler extends BaseTypeHandler<String> {
 
