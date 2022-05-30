@@ -44,6 +44,8 @@ dependencies {
 	compileOnly 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compileOnly 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	
+	compileOnly 'io.swagger:swagger-annotations:1.6.1'
+	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
