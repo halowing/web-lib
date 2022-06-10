@@ -5,11 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
+
+import com.halowing.util.TimeUtility;
 
 /**
  * LocalDateTime 를 CHAR(14)로 변환
@@ -20,13 +21,11 @@ import org.apache.ibatis.type.MappedJdbcTypes;
 @MappedJdbcTypes(JdbcType.CHAR)
 public class LocalTimeHandler extends BaseTypeHandler<LocalTime> {
 	
-	private static final String PATTERN = "HHmm";
-
 	@Override
 	public void setNonNullParameter(PreparedStatement ps, int i, LocalTime ldt, JdbcType jdbcType)
 			throws SQLException {
 		
-		ps.setString(i,ldt.format(DateTimeFormatter.ofPattern(PATTERN)) );
+		ps.setString(i,ldt.format(TimeUtility.DB_HOUR_MINUTE_FORMATTER) );
 	}
 
 	@Override
@@ -50,7 +49,7 @@ public class LocalTimeHandler extends BaseTypeHandler<LocalTime> {
 	private LocalTime parse(String str) {
 		if(str == null) return null;
 		
-		return LocalTime.parse(str, DateTimeFormatter.ofPattern(PATTERN));
+		return LocalTime.parse(str, TimeUtility.DB_HOUR_MINUTE_FORMATTER);
 	}
 
 }
