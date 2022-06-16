@@ -9,7 +9,7 @@ public class DefaultApplicationException extends RuntimeException {
 	private static final HttpStatus DEFAULT_ERROR_STATUS = HttpStatus.INTERNAL_SERVER_ERROR;
 	
 	private HttpStatus status;
-	private String message;
+//	private String message;
 	
 
 
@@ -18,8 +18,8 @@ public class DefaultApplicationException extends RuntimeException {
 	}
 	
 	public DefaultApplicationException(String message) {
+		super(message);
 		this.status = DEFAULT_ERROR_STATUS;
-		this.message = message;
 	}
 	
 	public DefaultApplicationException(HttpStatus status) {
@@ -27,9 +27,8 @@ public class DefaultApplicationException extends RuntimeException {
 	}
 
 	public DefaultApplicationException(HttpStatus status, String message) {
-		super(message);
+		super(message == null? status.getReasonPhrase() :message);
 		this.status = status;
-		this.message = message;
 	}	
 
 	public DefaultApplicationException(Throwable cause) {
@@ -43,7 +42,7 @@ public class DefaultApplicationException extends RuntimeException {
 
 	@Override
 	public String toString() {
-		return "DefaultApplicationException [status=" + status + ", message=" + message + "]";
+		return "DefaultApplicationException [status=" + status + "]";
 	}
 	
 }
