@@ -1,8 +1,12 @@
 package com.halowing.spring.web.dto.request;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -15,94 +19,133 @@ public class SearchRequest implements Serializable {
 
 	private static final long serialVersionUID = -4583263585027144214L;
 	
-//	Search
-	@ApiModelProperty(value = "검색의 시작 시점 ")
-	@DateTimeFormat(iso = ISO.DATE_TIME)
-	private LocalDateTime searchStartDateTime;
+	@ApiModelProperty(value = "검색의 시작일")
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate startDate;
 	
-	@ApiModelProperty(value = "검색의 종료 시점")
-	@DateTimeFormat(iso = ISO.DATE_TIME)
-	private LocalDateTime searchEndDateTime;
+	@ApiModelProperty(value = "검색의 종료일")
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate endDate;
+	
+	@ApiModelProperty(value = "검색의 시작 시각")
+	@DateTimeFormat(iso = ISO.TIME, fallbackPatterns = "HH:mm:ss")
+	private LocalTime startTime;
+	
+	@ApiModelProperty(value = "검색의 종료 시각")
+	@DateTimeFormat(iso = ISO.TIME, fallbackPatterns = "HH:mm:ss")
+	private LocalTime endTime;
+	
+	@ApiModelProperty(value = "검색의 시작 일시")
+	@DateTimeFormat(iso = ISO.DATE_TIME, fallbackPatterns = {"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd'T'HH:mm:ss"})
+	private LocalDateTime startDateTime;
+	
+	@ApiModelProperty(value = "검색의 종료 일시")
+	@DateTimeFormat(iso = ISO.DATE_TIME, fallbackPatterns = {"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd'T'HH:mm:ss"})
+	private LocalDateTime endDateTime;
 	
 	@ApiModelProperty(value = "검색어")
-	private String searchWord;
+	private String[] searchWord;
 	
 	@ApiModelProperty(value = "검색 영역")
-	private String[] scope;
-	
-//	paging
-	@ApiModelProperty(value = "검색할 컨텐트의 시작 위치, 첫페이지는 0 , offset = (page-1)*limit")
-	private Integer offset;
-	@ApiModelProperty(value = "검색할 컨텐트의 갯 수")
-	private Integer limit;
-	
-	public SearchRequest() {
-		super();
-	}
-	
-	
-	
-//	toString
-	
+	private String[] searchScope;
+
 	@Override
 	public String toString() {
-		return "SearchRequest [searchStartDateTime=" + searchStartDateTime + ", searchEndDateTime=" + searchEndDateTime
-				+ ", searchWord=" + searchWord + ", scope=" + Arrays.toString(scope) + ", offset=" + offset + ", limit="
-				+ limit + "]";
+		return "SearchRequest [startDate=" + startDate + ", endDate=" + endDate + ", startTime=" + startTime
+				+ ", endTime=" + endTime + ", startDateTime=" + startDateTime + ", endDateTime=" + endDateTime
+				+ ", searchWord=" + Arrays.toString(searchWord) + ", searchScope=" + Arrays.toString(searchScope) + "]";
 	}
 
-//	Getters And Setters	
-
-	public LocalDateTime getSearchStartDateTime() {
-		return searchStartDateTime;
+	/* GETTERS */
+	
+	public LocalDate getStartDate() {
+		return startDate;
 	}
 
-	public void setSearchStartDateTime(LocalDateTime searchEndDateTime) {
-		this.searchStartDateTime = searchEndDateTime;
+	public LocalDate getEndDate() {
+		return endDate;
 	}
 
-	public LocalDateTime getSearchEndDateTime() {
-		return searchEndDateTime;
+	public LocalTime getStartTime() {
+		return startTime;
 	}
 
-	public void setSearchEndDateTime(LocalDateTime searchEndDateTime) {
-		this.searchEndDateTime = searchEndDateTime;
+	public LocalTime getEndTime() {
+		return endTime;
 	}
 
-	public Integer getOffset() {
-		return offset;
+	public LocalDateTime getStartDateTime() {
+		return startDateTime;
 	}
 
-	public void setOffset(Integer offset) {
-		this.offset = offset;
+	public LocalDateTime getEndDateTime() {
+		return endDateTime;
 	}
 
-	public Integer getLimit() {
-		return limit;
-	}
-
-	public void setLimit(Integer limit) {
-		this.limit = limit;
-	}
-
-	public String getSearchWord() {
+	public String[] getSearchWord() {
 		return searchWord;
 	}
 
-	public void setSearchWord(String searchWord) {
-		this.searchWord = searchWord;
+	public String[] getSearchScope() {
+		return searchScope;
 	}
 
-
-
-	public String[] getScope() {
-		return scope;
+	/* SETTERS */
+	
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
 	}
 
-
-
-	public void setScope(String[] scope) {
-		this.scope = scope;
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
 	}
 
+	public void setStartTime(LocalTime startTime) {
+		this.startTime = startTime;
+	}
+
+	public void setEndTime(LocalTime endTime) {
+		this.endTime = endTime;
+	}
+
+	public void setStartDateTime(LocalDateTime startDateTime) {
+		this.startDateTime = startDateTime;
+	}
+
+	public void setEndDateTime(LocalDateTime endDateTime) {
+		this.endDateTime = endDateTime;
+	}
+
+	public void setSearchWord(String[] searchWord) {
+		
+		if(searchWord == null || searchWord.length == 0) return;
+		
+		this.searchWord = split(searchWord);
+	}
+
+	public void setSearchScope(String[] searchScope) {
+		if(searchScope == null || searchScope.length == 0) return;
+		this.searchScope = split(searchScope);
+	}
+	
+	private String[] split(String[] searchWord){
+		
+		List<String> wordList = new ArrayList<>();
+		
+		Arrays.asList(searchWord).stream()
+		.filter(it -> !it.trim().replaceAll("[#,]", "").isBlank())
+		.forEach(it -> {
+			wordList.addAll(
+				Arrays.asList(
+					it.trim()
+					.replaceAll("[,\\s]", "#")
+					.replaceAll("#+", "#")
+					.replaceAll("^#", "").split("#")
+				)
+			);
+		})
+		;
+		
+		return (String[]) wordList.toArray();
+	}
 }
