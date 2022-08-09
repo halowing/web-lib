@@ -9,10 +9,14 @@ group = 'com.halowing.spring'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+java {
+	//withJavadocJar()
+	withSourcesJar()
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
-//        	groupId = 'com.halowing.spring'
             artifactId = 'web-lib'
             from components.java
             versionMapping {
@@ -23,6 +27,22 @@ publishing {
             		fromResolutionResult()
             	}
             }
+            pom {
+            	name = 'Web Library'
+            	description = 'Halowing web library'
+//            	url = 'http://halowing.com/library/web-lib'
+            	licenses{
+            		name = 'The Apache License, Version 2.0'
+                  	url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            	}
+            	developers {
+            		developer {
+            			id = 'sgkim'
+            			name = 'Seonggeun Kim'
+            			email = 'sgkim@halowing.com'
+            		}
+            	}
+            } 
         }
     }
     
