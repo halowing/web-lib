@@ -1,7 +1,5 @@
 package com.halowing.spring.web.code;
 
-import javax.validation.constraints.NotNull;
-
 public class ErrorCode {
 
 	public static final String ETC					= 	"error.etc";
