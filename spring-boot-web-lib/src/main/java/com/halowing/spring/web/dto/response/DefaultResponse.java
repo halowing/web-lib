@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import org.springframework.http.HttpStatus;
 
+import com.halowing.util.StringUtility;
+
 public class DefaultResponse implements Serializable {
 
 	private static final long serialVersionUID = -1234462789808842557L;
@@ -14,12 +16,11 @@ public class DefaultResponse implements Serializable {
 
 	public DefaultResponse(HttpStatus httpStatus, String message) {
 		this.status = httpStatus.value();
-		this.message = message;
+		this.message = StringUtility.isBlank(message) ? httpStatus.getReasonPhrase() : message;
 	}
 	
 	public DefaultResponse(HttpStatus httpStatus) {
-		this.status = httpStatus.value();
-		this.message = null;
+		this(httpStatus,null);
 	}
 
 	public Integer getStatus() {
