@@ -25,7 +25,7 @@ public class LocalDateTimeHandler extends BaseTypeHandler<LocalDateTime> {
 	public void setNonNullParameter(PreparedStatement ps, int i, LocalDateTime ldt, JdbcType jdbcType)
 			throws SQLException {
 		
-		ps.setString(i,ldt.format(TimeUtility.DB_DATE_TIMESTAMP_FORMATTER) );
+		ps.setString(i,ldt.format(TimeUtility.DB_DATE_TIME_FORMATTER) );
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class LocalDateTimeHandler extends BaseTypeHandler<LocalDateTime> {
 	private LocalDateTime parse(String str) {
 		if(str == null) return null;
 		
-		return LocalDateTime.parse(str, TimeUtility.DB_DATE_TIMESTAMP_FORMATTER);
+		return LocalDateTime.parse(str, TimeUtility.DB_DATE_TIME_FORMATTER);
 	}
 
 }
