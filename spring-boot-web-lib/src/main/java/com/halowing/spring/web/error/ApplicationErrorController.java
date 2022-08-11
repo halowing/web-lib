@@ -9,12 +9,14 @@ import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorCon
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 
 import com.halowing.spring.web.dto.response.DefaultResponse;
 import com.halowing.util.StringUtility;
 
-//@RestController
+@RestController
 public class ApplicationErrorController extends AbstractErrorController {
 	
 	public ApplicationErrorController(ErrorAttributes errorAttributes) {
@@ -23,7 +25,7 @@ public class ApplicationErrorController extends AbstractErrorController {
 
 	private static final Logger log = LoggerFactory.getLogger(ApplicationErrorController.class);
 
-//	@RequestMapping("/error")
+	@RequestMapping("/error")
 	public ResponseEntity<DefaultResponse> error(HttpServletRequest request){
 		
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
