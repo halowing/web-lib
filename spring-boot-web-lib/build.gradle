@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.8'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java-library'
 	id 'maven-publish'
 }
 
@@ -29,10 +29,10 @@ publishing {
             }
             pom {
             	name = 'Web Library'
-            	description = 'Halowing web library'
+            	description = 'Utility for web on spring framework. '
 //            	url = 'http://halowing.com/library/web-lib'
             	licenses{
-            		name = 'The Apache License, Version 2.0'
+            		name = 'Apache License, Version 2.0'
                   	url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
             	}
             	developers {
