@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 
 @Deprecated
-public class HttpNotFoundException extends DefaultApplicationException  {
+public class HttpNotFoundException extends WebApplicationException  {
 
 	private static final long serialVersionUID = -1702667171228990922L;
 	

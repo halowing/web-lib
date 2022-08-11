@@ -8,7 +8,7 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver;
 
-import com.halowing.spring.web.exception.DefaultApplicationException;
+import com.halowing.spring.web.exception.WebApplicationException;
 
 public class DefaultApplicationExceptionResolver extends AbstractHandlerExceptionResolver {
 	
@@ -24,9 +24,9 @@ public class DefaultApplicationExceptionResolver extends AbstractHandlerExceptio
 	protected ModelAndView doResolveException(HttpServletRequest request, HttpServletResponse servletResponse, Object handler,
 			Exception ex) {
 	
-		if(!( ex instanceof DefaultApplicationException)) return null;
+		if(!( ex instanceof WebApplicationException)) return null;
 		
-		DefaultApplicationException daex = (DefaultApplicationException) ex;
+		WebApplicationException daex = (WebApplicationException) ex;
 		
 		return ResolverUtil.getModelAndView(daex.getStatus(), daex.getCode(), daex.getArgs(),localeResolver.resolveLocale(request), messageSource, daex.getLocalizedMessage());
 	}

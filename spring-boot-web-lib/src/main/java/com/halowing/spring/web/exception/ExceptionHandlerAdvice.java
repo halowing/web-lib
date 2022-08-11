@@ -48,8 +48,8 @@ public class ExceptionHandlerAdvice {
 		return getErrorResponseEntity(ex.getStatusCode(),ErrorCode.CONFLICT, null,locale, ex.getMessage());
 	}
 	
-	@ExceptionHandler(DefaultApplicationException.class)
-	public ResponseEntity<DefaultResponse> defaultApplicationExceptionHandler(DefaultApplicationException ex, Locale locale){
+	@ExceptionHandler(WebApplicationException.class)
+	public ResponseEntity<DefaultResponse> defaultApplicationExceptionHandler(WebApplicationException ex, Locale locale){
 		log.error("DefaultApplicationException : {}",ex);
 		
 		return getErrorResponseEntity(ex.getStatus(),ex.getCode(), ex.getArgs(),locale, ex.getMessage());

@@ -1,4 +1,4 @@
-package com.halowing.spring.servlet.error;
+package com.halowing.spring.web.error;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -15,13 +15,13 @@ import com.halowing.spring.web.dto.response.DefaultResponse;
 import com.halowing.util.StringUtility;
 
 //@RestController
-public class ErrorController extends AbstractErrorController {
+public class ApplicationErrorController extends AbstractErrorController {
 	
-	public ErrorController(ErrorAttributes errorAttributes) {
+	public ApplicationErrorController(ErrorAttributes errorAttributes) {
 		super(errorAttributes);
 	}
 
-	private static final Logger log = LoggerFactory.getLogger(ErrorController.class);
+	private static final Logger log = LoggerFactory.getLogger(ApplicationErrorController.class);
 
 //	@RequestMapping("/error")
 	public ResponseEntity<DefaultResponse> error(HttpServletRequest request){
