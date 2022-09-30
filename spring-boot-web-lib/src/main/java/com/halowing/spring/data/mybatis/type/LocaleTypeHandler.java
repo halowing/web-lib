@@ -9,6 +9,7 @@ import java.util.Locale;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
+import org.apache.ibatis.type.MappedTypes;
 
 /**
  * Locale.Class 를 VARCHAR로 변환
@@ -17,6 +18,7 @@ import org.apache.ibatis.type.MappedJdbcTypes;
  *
  */
 @MappedJdbcTypes(JdbcType.VARCHAR)
+@MappedTypes(Locale.class)
 public class LocaleTypeHandler extends BaseTypeHandler<Locale> {
 
 	@Override

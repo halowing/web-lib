@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
+import org.apache.ibatis.type.MappedTypes;
 
 import com.halowing.util.TimeUtility;
 
@@ -19,6 +20,7 @@ import com.halowing.util.TimeUtility;
  *
  */
 @MappedJdbcTypes(JdbcType.CHAR)
+@MappedTypes(LocalTime.class)
 public class LocalTimeHandler extends BaseTypeHandler<LocalTime> {
 	
 	@Override
