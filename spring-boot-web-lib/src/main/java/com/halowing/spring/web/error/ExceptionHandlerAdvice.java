@@ -60,6 +60,7 @@ public class ExceptionHandlerAdvice {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<DefaultResponse> othersExceptionHandler(Exception ex, Locale locale){
 		log.error("Exception : {}",ex.getMessage());
+		log.trace("",ex);
 //		ex.printStackTrace();
 		return getErrorResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCode.ETC, null, locale, ex.getMessage());
 	}
