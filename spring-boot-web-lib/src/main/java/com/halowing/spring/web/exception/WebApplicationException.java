@@ -5,8 +5,6 @@ import java.util.Arrays;
 import org.springframework.http.HttpStatus;
 
 import com.halowing.spring.exception.DefaultApplicationException;
-import com.halowing.spring.web.code.ErrorCode;
-import com.halowing.util.StringUtility;
 
 public class WebApplicationException extends DefaultApplicationException {
 
