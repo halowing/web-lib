@@ -16,7 +16,7 @@ public class LoginUser {
 	@NotBlank
 	private String loginId;
 	
-	@NotBlank
+	@NotNull
 	private Role role;
 	
 	@URL
