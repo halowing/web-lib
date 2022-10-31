@@ -34,8 +34,12 @@ public class ResolverUtil {
 					);
 		}
 		
-		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView(),"response",response);
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		mav.setStatus(status);
+		mav.addObject("message",response.getMessage());
+		mav.addObject("status",response.getStatus());
+		mav.addObject("requestDateTime",response.getRequestDateTime());
+		mav.addObject("responseDateTime",response.getResponseDateTime());
 		
 		return mav;
 	}
