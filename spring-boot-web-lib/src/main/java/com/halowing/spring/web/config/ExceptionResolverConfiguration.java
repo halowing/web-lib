@@ -1,5 +1,6 @@
 package com.halowing.spring.web.config;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import com.halowing.spring.web.resolver.DefaultExceptionResolver;
 import com.halowing.spring.web.resolver.MethodArgumentNotValidExceptionResolver;
 import com.halowing.spring.web.resolver.SqlExceptionResolver;
 
+@ConditionalOnProperty(name = "app.resolver.enable",  matchIfMissing = false)
 @Configuration
 public class ExceptionResolverConfiguration {
 	
