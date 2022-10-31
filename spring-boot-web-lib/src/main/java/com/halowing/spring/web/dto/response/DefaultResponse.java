@@ -20,6 +20,7 @@ public class DefaultResponse implements Serializable {
 	public DefaultResponse(HttpStatus httpStatus, String message) {
 		this.status = httpStatus.value();
 		this.message = StringUtility.isBlank(message) ? httpStatus.getReasonPhrase() : message;
+		this.responseDateTime = LocalDateTime.now();
 	}
 	
 	public DefaultResponse(HttpStatus httpStatus) {
