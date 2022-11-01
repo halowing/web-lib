@@ -17,4 +17,6 @@ public class ErrorCode {
 	public static final String DUPLICATE_KEY 			= 	"error.sql.duplicateKey";
 	public static final String SQL 						= 	"error.sql.etc";
 	
+	public static final String LEGACY					= 	"error.legacy.etc";
+	
 }

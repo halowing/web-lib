@@ -29,7 +29,7 @@ public class DefaultExceptionResolver extends AbstractHandlerExceptionResolver {
 	protected ModelAndView doResolveException(HttpServletRequest request, HttpServletResponse servletResponse, Object handler,
 			Exception ex) {
 	
-		log.error("Exception is \n{}",ex);
+		log.error("Exception is \n",ex);
 		
 		return ResolverUtil.getModelAndView(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCode.ETC, localeResolver.resolveLocale(request), messageSource, ex.getMessage());
 	}

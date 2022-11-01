@@ -44,20 +44,29 @@ public class SearchRequest implements Serializable {
 	private LocalDateTime endDateTime;
 	
 	@ApiModelProperty(value = "검색어")
-	private String[] searchWord;
+	private String searchWord;
 	
-	@ApiModelProperty(value = "검색 영역")
-	private String[] searchScope;
+	@ApiModelProperty(value = "검색영역")
+	private String searchScope;
+	
+	@ApiModelProperty(value = "검색어들")
+	private String[] searchWords;
+	
+	@ApiModelProperty(value = "검색영역들")
+	private String[] searchScopes;
 
+	
+
+	/* GETTERS */
+	
 	@Override
 	public String toString() {
 		return "SearchRequest [startDate=" + startDate + ", endDate=" + endDate + ", startTime=" + startTime
 				+ ", endTime=" + endTime + ", startDateTime=" + startDateTime + ", endDateTime=" + endDateTime
-				+ ", searchWord=" + Arrays.toString(searchWord) + ", searchScope=" + Arrays.toString(searchScope) + "]";
+				+ ", searchWord=" + searchWord + ", searchScope=" + searchScope + ", searchWords="
+				+ Arrays.toString(searchWords) + ", searchScopes=" + Arrays.toString(searchScopes) + "]";
 	}
 
-	/* GETTERS */
-	
 	public LocalDate getStartDate() {
 		return startDate;
 	}
@@ -82,12 +91,20 @@ public class SearchRequest implements Serializable {
 		return endDateTime;
 	}
 
-	public String[] getSearchWord() {
+	public String getSearchWord() {
 		return searchWord;
 	}
 
-	public String[] getSearchScope() {
+	public String getSearchScope() {
 		return searchScope;
+	}
+	
+	public String[] getSearchWords() {
+		return searchWords;
+	}
+
+	public String[] getSearchScopes() {
+		return searchScopes;
 	}
 
 	/* SETTERS */
@@ -115,17 +132,27 @@ public class SearchRequest implements Serializable {
 	public void setEndDateTime(LocalDateTime endDateTime) {
 		this.endDateTime = endDateTime;
 	}
-
-	public void setSearchWord(String[] searchWord) {
+	
+	public void setSearchWord(String searchWord) {
 		
-		if(searchWord == null || searchWord.length == 0) return;
-		
-		this.searchWord = split(searchWord);
+		this.searchWord = searchWord;
+	}
+	
+	
+	public void setSearchScope(String searchScope) {
+		this.searchScope = searchScope;
 	}
 
-	public void setSearchScope(String[] searchScope) {
-		if(searchScope == null || searchScope.length == 0) return;
-		this.searchScope = split(searchScope);
+	public void setSearchWords(String[] searchWords) {
+		
+		if(searchWords == null || searchWords.length == 0) return;
+		
+		this.searchWords = split(searchWords);
+	}
+
+	public void setSearchScopes(String[] searchScopes) {
+		if(searchScopes == null || searchScopes.length == 0) return;
+		this.searchScopes = split(searchScopes);
 	}
 	
 	private String[] split(String[] searchWord){

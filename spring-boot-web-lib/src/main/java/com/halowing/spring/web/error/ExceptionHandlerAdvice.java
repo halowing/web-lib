@@ -51,8 +51,8 @@ public class ExceptionHandlerAdvice {
 	}
 	
 	@ExceptionHandler(WebApplicationException.class)
-	public ResponseEntity<DefaultResponse> defaultApplicationExceptionHandler(WebApplicationException ex, Locale locale){
-		log.error("DefaultApplicationException : {}",ex);
+	public ResponseEntity<DefaultResponse> webApplicationExceptionHandler(WebApplicationException ex, Locale locale){
+		log.error("WebApplicationException : errMsg = {}, args = {}", ex.getMessage(), ex.getArgs());
 		
 		return getErrorResponseEntity(ex.getStatus(),ex.getCode(), ex.getArgs(),locale, ex.getMessage());
 	}
@@ -60,6 +60,7 @@ public class ExceptionHandlerAdvice {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<DefaultResponse> othersExceptionHandler(Exception ex, Locale locale){
 		log.error("Exception : {}",ex.getMessage());
+		log.trace("",ex);
 //		ex.printStackTrace();
 		return getErrorResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCode.ETC, null, locale, ex.getMessage());
 	}
@@ -75,11 +76,15 @@ public class ExceptionHandlerAdvice {
 		
 		DefaultResponse body = null;
 		if(messageSource == null) {
-			body = new DefaultResponse(	status,errorMessage);
+			body = new DefaultResponse(	
+						status,
+						errorMessage
+					);
 		}else {
+			String responseMsg = messageSource.getMessage(errorCode,args,errorCode,locale);
 			body = new DefaultResponse(
 						status, 
-						String.format("%s (%s)",  messageSource.getMessage(errorCode,args,"Error",locale), errorMessage ) 
+						String.format("%s (%s)", responseMsg , errorMessage ) 
 					);
 		}
 		
