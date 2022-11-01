@@ -52,7 +52,7 @@ public class ExceptionHandlerAdvice {
 	
 	@ExceptionHandler(WebApplicationException.class)
 	public ResponseEntity<DefaultResponse> defaultApplicationExceptionHandler(WebApplicationException ex, Locale locale){
-		log.error("DefaultApplicationException : {}",ex);
+		log.error("WebApplicationException : {}",ex.getMessage());
 		
 		return getErrorResponseEntity(ex.getStatus(),ex.getCode(), ex.getArgs(),locale, ex.getMessage());
 	}
@@ -80,7 +80,7 @@ public class ExceptionHandlerAdvice {
 		}else {
 			body = new DefaultResponse(
 						status, 
-						String.format("%s (%s)",  messageSource.getMessage(errorCode,args,"Error",locale), errorMessage ) 
+						String.format("%s\\r\\n(%s)",  messageSource.getMessage(errorCode,args,"Error",locale), errorMessage ) 
 					);
 		}
 		
