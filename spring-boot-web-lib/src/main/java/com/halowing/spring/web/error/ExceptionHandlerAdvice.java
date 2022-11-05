@@ -25,6 +25,8 @@ import com.halowing.spring.web.exception.WebApplicationException;
 public class ExceptionHandlerAdvice {
 	
 	private static final Logger log = LoggerFactory.getLogger(ExceptionHandlerAdvice.class);
+	private static final String DEFAULT_MESSAGE = "System ERROR";
+	
 	
 	private final MessageSource messageSource;
 	
@@ -81,10 +83,10 @@ public class ExceptionHandlerAdvice {
 						errorMessage
 					);
 		}else {
-			String responseMsg = messageSource.getMessage(errorCode,args,errorCode,locale);
+			String responseMsg = messageSource.getMessage(errorCode, args, DEFAULT_MESSAGE, locale);
 			body = new DefaultResponse(
 						status, 
-						String.format("%s (%s)", responseMsg , errorMessage ) 
+						String.format("%s (%s)", responseMsg , DEFAULT_MESSAGE.equals(responseMsg) ? errorCode : errorMessage) 
 					);
 		}
 		
