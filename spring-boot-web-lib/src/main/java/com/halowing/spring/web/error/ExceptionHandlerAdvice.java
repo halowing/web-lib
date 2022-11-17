@@ -59,14 +59,6 @@ public class ExceptionHandlerAdvice {
 		return getErrorResponseEntity(ex.getStatus(),ex.getCode(), ex.getArgs(),locale, ex.getMessage());
 	}
 	
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<DefaultResponse> othersExceptionHandler(Exception ex, Locale locale){
-		log.error("Exception : {}",ex.getMessage());
-		log.trace("",ex);
-//		ex.printStackTrace();
-		return getErrorResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCode.ETC, null, locale, ex.getMessage());
-	}
-	
 	private ResponseEntity<DefaultResponse> getErrorResponseEntity(
 			@NotNull HttpStatus status,
 			@NotNull String errorCode,
@@ -86,11 +78,47 @@ public class ExceptionHandlerAdvice {
 			String responseMsg = messageSource.getMessage(errorCode, args, DEFAULT_MESSAGE, locale);
 			body = new DefaultResponse(
 						status, 
-						String.format("%s (%s)", responseMsg , DEFAULT_MESSAGE.equals(responseMsg) ? errorCode : errorMessage) 
+						String.format("%s (%s)", responseMsg , errorMessage) 
 					);
 		}
 		
 		return new ResponseEntity<DefaultResponse>(body,status);
 	}
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<DefaultResponse> othersExceptionHandler(Exception ex, Locale locale){
+		log.error("Exception : {}",ex.getMessage());
+		log.trace("",ex);
+//		ex.printStackTrace();
+		return getEtcResponse(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCode.ETC, null, locale, ex.getMessage());
+	}
+	
+	private ResponseEntity<DefaultResponse> getEtcResponse(
+			@NotNull HttpStatus status,
+			@NotNull String errorCode,
+			@Nullable String[] args,
+			@NotNull Locale locale, 
+			@Nullable String errorMessage
+			
+			){
+		
+		DefaultResponse body = null;
+		if(messageSource == null) {
+			body = new DefaultResponse(	
+						status,
+						errorMessage
+					);
+		}else {
+			String responseMsg = messageSource.getMessage(errorCode, args, DEFAULT_MESSAGE, locale);
+			body = new DefaultResponse(
+						status, 
+						String.format("%s (%s)", responseMsg , errorCode) 
+					);
+		}
+		
+		return new ResponseEntity<DefaultResponse>(body,status);
+	}
+	
+	
 
 }
