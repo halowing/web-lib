@@ -11,7 +11,7 @@ import com.halowing.spring.web.resolver.DefaultExceptionResolver;
 import com.halowing.spring.web.resolver.MethodArgumentNotValidExceptionResolver;
 import com.halowing.spring.web.resolver.SqlExceptionResolver;
 
-@ConditionalOnProperty(name = "app.resolver.enable",  matchIfMissing = false)
+@ConditionalOnProperty(name = "com.halowing.spring.web.config.resolver.exception.enable",  matchIfMissing = false)
 @Configuration
 public class ExceptionResolverConfiguration {
 	
