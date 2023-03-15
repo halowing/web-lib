@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Async;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -36,7 +35,6 @@ public class FileUtility {
 		}
 	}
 	
-	@Async
 	public static void saveFile(String json, String filePath) {
 		
 		if(json == null || filePath == null) return ;
@@ -60,7 +58,6 @@ public class FileUtility {
 		}
 	}
 	
-	@Async
 	public static <T> void saveFile(T obj, String filePath) {
 		
 		if(obj == null || filePath == null) return ;
