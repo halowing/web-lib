@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.halowing.util.StringUtility;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -147,32 +147,12 @@ public class SearchRequest implements Serializable {
 		
 		if(searchWords == null || searchWords.length == 0) return;
 		
-		this.searchWords = split(searchWords);
+		this.searchWords = StringUtility.getTags(searchWord);
 	}
 
 	public void setSearchScopes(String[] searchScopes) {
 		if(searchScopes == null || searchScopes.length == 0) return;
-		this.searchScopes = split(searchScopes);
+		this.searchScopes = StringUtility.getTags(searchWord);
 	}
 	
-	private String[] split(String[] searchWord){
-		
-		List<String> wordList = new ArrayList<>();
-		
-		Arrays.asList(searchWord).stream()
-		.filter(it -> !it.trim().replaceAll("[#,]", "").isBlank())
-		.forEach(it -> {
-			wordList.addAll(
-				Arrays.asList(
-					it.trim()
-					.replaceAll("[,\\s]", "#")
-					.replaceAll("#+", "#")
-					.replaceAll("^#", "").split("#")
-				)
-			);
-		})
-		;
-		
-		return (String[]) wordList.toArray();
-	}
 }
