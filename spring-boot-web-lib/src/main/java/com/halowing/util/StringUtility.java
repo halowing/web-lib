@@ -6,17 +6,32 @@ import java.util.List;
 
 public class StringUtility {
 
+	/**
+	 * Checking input String is null or empty 
+	 * @param str
+	 * @return
+	 */
 	public static boolean isEmpty(String str) {
 		if(str == null || str.isEmpty()) return true;
 		return false;
 	}
 	
+	/**
+	 * Checking input String is null or only have white space
+	 * @param str
+	 * @return
+	 */
 	public static boolean isBlank(String str) {
 		if(str == null || str.trim().isEmpty()) return true;
 		return false;
 	}
 	
-	public static String[] splitBySharp(String[] searchWord){
+	/**
+	 * Return Tags from Input String.
+	 * @param searchWord
+	 * @return
+	 */
+	public static String[] getTags(String[] searchWord){
 		
 		List<String> wordList = new ArrayList<>();
 		
@@ -24,28 +39,38 @@ public class StringUtility {
 		.filter(it -> !it.trim().replaceAll("[#,]", "").isBlank())
 		.forEach(it -> {
 			wordList.addAll(
-				Arrays.asList( split(it) )
+				Arrays.asList( getTags(it) )
 			);
 		})
 		;
 		
-		return (String[]) wordList.toArray();
+		return wordList.toArray(new String[wordList.size()]);
 	}
 	
-	public static String[] splitBySharp(String searchWord){
+	/**
+	 * 입력 문자열에서 hash tag가 있는 문자들을 추출 
+	 * @param searchWord
+	 * @return
+	 */
+	public static String[] getTags(String searchWord) {
 		
 		if(searchWord == null 
-				|| searchWord.trim().replaceAll("[#,]", "").isBlank())
+				|| searchWord.trim().replaceAll("[#,]", "").isBlank()
+				|| !searchWord.contains("#"))
 			return new String[0];
 		
-		return split(searchWord);
+		String[] arr = searchWord.trim().replaceAll("\\s+", " ").replaceAll("#", " #").split("[,\\s]");
+		List<String> rs = new ArrayList<>();
+		
+		Arrays.asList(arr).stream()
+		.filter(it -> it.matches("^#\\S+"))
+		.map(it -> it.replaceAll("", ""))
+		.forEach(it -> {
+			rs.add(it.replaceAll("[#.]", ""));
+		});
+		;
+		
+		return rs.toArray(new String[rs.size()]);
 	}
 	
-	private static String[] split(String searchWord) {
-		
-		return searchWord.trim()
-				.replaceAll("[,\\s]", "#")
-				.replaceAll("#+", "#")
-				.replaceAll("^#", "").split("#");
-	}
 }
