@@ -7,9 +7,8 @@ import javax.persistence.Converter;
 
 import com.halowing.util.TimeUtility;
 
-@Deprecated
 @Converter
-public class LocalDatetimeToStringConverter implements AttributeConverter<LocalDateTime, String> {
+public class LocalDatetimeConverter implements AttributeConverter<LocalDateTime, String> {
 	
 	@Override
 	public String convertToDatabaseColumn(LocalDateTime attribute) {
@@ -18,7 +17,7 @@ public class LocalDatetimeToStringConverter implements AttributeConverter<LocalD
 		
 		
 		
-		return attribute.format(TimeUtility.DB_DATE_TIMESTAMP_FORMATTER);
+		return attribute.format(TimeUtility.DB_DATE_TIME_FORMATTER);
 	}
 
 	@Override
@@ -26,7 +25,7 @@ public class LocalDatetimeToStringConverter implements AttributeConverter<LocalD
 		
 		if(dbData == null || dbData.isBlank()) return null;
 		
-		return LocalDateTime.parse(dbData, TimeUtility.DB_DATE_TIMESTAMP_FORMATTER);
+		return LocalDateTime.parse(dbData, TimeUtility.DB_DATE_TIME_FORMATTER);
 	}
 	
 	

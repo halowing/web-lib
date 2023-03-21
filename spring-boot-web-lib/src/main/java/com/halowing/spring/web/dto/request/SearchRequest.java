@@ -11,48 +11,70 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.halowing.util.StringUtility;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(description = "페이징 및 검색을 위한 질의 객체")
+/**
+ * 페이징 및 검색을 위한 질의 객체
+ * @author halow
+ *
+ */
 public class SearchRequest implements Serializable {
 
 	private static final long serialVersionUID = -4583263585027144214L;
 	
-	@ApiModelProperty(value = "검색의 시작일")
+	/**
+	 * 검색의 시작일
+	 */
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate startDate;
 	
-	@ApiModelProperty(value = "검색의 종료일")
+	/**
+	 * 검색의 종료일
+	 */
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate endDate;
 	
-	@ApiModelProperty(value = "검색의 시작 시각")
+	/**
+	 * 검색의 시작 시각
+	 */
 	@DateTimeFormat(iso = ISO.TIME, fallbackPatterns = "HH:mm:ss")
 	private LocalTime startTime;
 	
-	@ApiModelProperty(value = "검색의 종료 시각")
+	/**
+	 * 검색의 종료 시각
+	 */
 	@DateTimeFormat(iso = ISO.TIME, fallbackPatterns = "HH:mm:ss")
 	private LocalTime endTime;
 	
-	@ApiModelProperty(value = "검색의 시작 일시")
+	/**
+	 * 검색의 시작 일시
+	 */
 	@DateTimeFormat(iso = ISO.DATE_TIME, fallbackPatterns = {"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd'T'HH:mm:ss"})
 	private LocalDateTime startDateTime;
 	
-	@ApiModelProperty(value = "검색의 종료 일시")
+	/**
+	 * 검색의 종료 일시
+	 */
 	@DateTimeFormat(iso = ISO.DATE_TIME, fallbackPatterns = {"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd'T'HH:mm:ss"})
 	private LocalDateTime endDateTime;
 	
-	@ApiModelProperty(value = "검색어")
+	/**
+	 * 검색어
+	 */
 	private String searchWord;
 	
-	@ApiModelProperty(value = "검색영역")
+	/**
+	 * 검색영역
+	 */
 	private String searchScope;
 	
-	@ApiModelProperty(value = "검색어들")
+	/**
+	 * 검색어들
+	 */
 	private String[] searchWords;
 	
-	@ApiModelProperty(value = "검색영역들")
+	/**
+	 * 검색영역들
+	 */
 	private String[] searchScopes;
 
 	

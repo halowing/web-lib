@@ -7,13 +7,11 @@ import javax.validation.constraints.NotNull;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.halowing.spring.web.dto.response.DefaultResponse;
 
-@Validated
 public class ResolverUtil {
 	
 	public static ModelAndView getModelAndView(

@@ -14,7 +14,7 @@ import org.apache.ibatis.type.MappedTypes;
 /**
  * Locale.Class 를 VARCHAR로 변환
  * ko_KR, ko 형태로 입력
- * @author sgkim <sgkim@thecnp.co.kr>
+ * @author sgkim <sgkim@halowing.com>
  *
  */
 @MappedJdbcTypes(JdbcType.VARCHAR)

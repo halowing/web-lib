@@ -16,7 +16,7 @@ import com.halowing.util.TimeUtility;
 /**
  * LocalDateTime 를 CHAR(8)로 변환
  * yyyyMMdd
- * @author sgkim <sgkim@thecnp.co.kr>
+ * @author sgkim <sgkim@halowing.com>
  *
  */
 @MappedJdbcTypes(JdbcType.CHAR)

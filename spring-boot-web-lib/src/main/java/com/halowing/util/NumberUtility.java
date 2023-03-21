@@ -15,6 +15,7 @@ public class NumberUtility {
 		
 	}
 	
+	@Deprecated
 	public static String round(String number, int offset, String defaultValue) {
 		
 		if(StringUtility.isBlank(number)) return defaultValue;
@@ -26,6 +27,27 @@ public class NumberUtility {
 	
 		
 		return "" +  round(a,offset);
+	}
+	
+	public static String toString(String number, int offset, String defaultValue) {
+		
+		if(StringUtility.isBlank(number)) return defaultValue;
+		
+		float a = Float.valueOf(number) ;
+	
+		
+//		return  String.format("%."+offset+"f", round(a,offset));
+		
+		return  String.format("%."+offset+"f", a);
+		
+	}
+	
+	public static String toString(Float number, int offset) {
+		
+		if(number == null) return null;
+		
+		return  String.format("%."+offset+"f", number);
+		
 	}
 
 }

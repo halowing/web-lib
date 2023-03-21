@@ -1,5 +1,8 @@
 package com.halowing.util;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -73,4 +76,32 @@ public class StringUtility {
 		return rs.toArray(new String[rs.size()]);
 	}
 	
+	
+	public static File writeToFile(String str, String filePath) throws IOException {
+		
+		if(str == null || filePath == null) return null;
+		
+		File file = new File(filePath);
+		
+		if(!file.exists()) {
+			
+			File dir = new File(filePath.substring(0, filePath.lastIndexOf("/")));
+			dir.mkdirs();
+		}
+		
+		FileWriter fw = null;
+		
+		try {
+			fw = new FileWriter(file);
+			
+			fw.write(str);
+			
+			return file;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if(fw != null)
+				fw.close();
+		}
+	}
 }

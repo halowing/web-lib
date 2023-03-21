@@ -2,16 +2,21 @@ package com.halowing.spring.web.dto;
 
 import java.util.Arrays;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
-@ApiModel(description = "List 졍렬 참조 객체")
+/**
+ * List 졍렬 참조 객체
+ * @author halow
+ *
+ */
 public class Sorting {
 
-	@ApiModelProperty(value = "내림차순 정렬 항목")
+	/*
+	 * 내림차순 정렬 항목
+	 */
 	private String[] desc;
 	
-	@ApiModelProperty(value = "오름차순 정렬 항목")
+	/*
+	 * 오름차순 정렬 항목
+	 */
 	private String[] asc;
 
 	@Override
