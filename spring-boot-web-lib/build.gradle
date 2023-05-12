@@ -1,12 +1,12 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.5'
+	id 'org.springframework.boot' version '2.7.11'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'java-library'
 	id 'maven-publish'
 }
 
 group = 'com.halowing.spring'
-version = '2.7.5.1-SNAPSHOT'
+version = '0.1.0-SNAPSHOT'
 sourceCompatibility = '11'
 
 java {
